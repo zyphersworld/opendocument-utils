@@ -29,7 +29,7 @@ fi
 if [ -e "content.xml" ]; then
   echo "Sorry, this cannot be done because some 'content.xml' already exists"
 else
-  # extract 'meta.xml' from the inputfile
+  # extract 'content.xml' from the inputfile
   unzip -qo $1 content.xml
 
   let "i = 1";
