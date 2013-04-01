@@ -1,7 +1,7 @@
 opendocument-utils
 ==================
 
-Utilities to work with OpenDocument files
+Utilities to work with OpenDocument files licensed under Apache License 2.0.
 
 documentpages
 -------------
