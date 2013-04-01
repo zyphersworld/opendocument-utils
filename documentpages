@@ -1,9 +1,24 @@
 #!/bin/bash
 # documentpages, counts document pages in a LibreOffice document.
-# Based on http://ask.libreoffice.org/en/question/13/how-do-i-get-document-information-from-the-command/?answer=131#post-id-131
 # Created: 2013-04-01
+# Based on http://ask.libreoffice.org/en/question/13/how-do-i-get-document-information-from-the-command/?answer=131#post-id-131
 #
 # uses: unzip and xmlstarlet, from http://xmlstar.sourceforge.net/
+#
+#
+# Copyright 2013 Miguel Mendes Ruiz
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
 
 if [ ! -e $1 ] || [[ "$1" == "" ]]; then
