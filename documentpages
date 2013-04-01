@@ -1,0 +1,31 @@
+#!/bin/bash
+# documentpages, counts document pages in a LibreOffice document.
+# Based on http://ask.libreoffice.org/en/question/13/how-do-i-get-document-information-from-the-command/?answer=131#post-id-131
+# Created: 2013-04-01
+#
+# uses: unzip and xmlstarlet, from http://xmlstar.sourceforge.net/
+#
+
+if [ ! -e $1 ] || [[ "$1" == "" ]]; then
+  echo "Usage: `basename $01` <filename>"
+  exit 1
+fi
+
+if [ -e "content.xml" ]; then
+  echo "Sorry, this cannot be done because some 'content.xml' already exists"
+else
+  # extract 'meta.xml' from the inputfile
+  unzip -qo $1 content.xml
+
+  let "i = 1";
+
+  for f in `xmlstarlet el content.xml`;
+  do
+    n=${f/*:}
+    if [[ "$n" =~ "page-break" ]]; then
+      let "i += 1";
+    fi
+    done
+    rm content.xml
+    echo $i;
+fi
