@@ -2,8 +2,7 @@
 # documentpages, counts document pages in a LibreOffice document.
 # Created: 2013-04-01
 # Based on http://ask.libreoffice.org/en/question/13/how-do-i-get-document-information-from-the-command/?answer=131#post-id-131
-#
-# uses: unzip and xmlstarlet, from http://xmlstar.sourceforge.net/
+# uses: unzip, head and xmlstarlet, from http://xmlstar.sourceforge.net/
 #
 #
 # Copyright 2013 Miguel Mendes Ruiz
@@ -32,15 +31,20 @@ else
   # extract 'content.xml' from the inputfile
   unzip -qo $1 content.xml
 
-  let "i = 1";
-
+  i=1;
+  lastPage="";
   for f in `xmlstarlet el content.xml`;
   do
     n=${f/*:}
-    if [[ "$n" =~ "page-break" ]]; then
-      let "i += 1";
+    if [[ "$n" =~ "page-number" ]]; then
+      w=`xmlstarlet sel -t -v "$f" content.xml | head -n 1`
+      lastPage="$n: $w"
     fi
-    done
-    rm content.xml
-    echo $i;
+    if [[ "$n" =~ "page-break" ]]; then
+      i+=1;
+    fi
+  done
+  rm content.xml
+  echo "last-$lastPage"
+  echo "page-breaks-count: $i"
 fi
