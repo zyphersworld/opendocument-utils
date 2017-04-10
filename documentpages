@@ -41,7 +41,7 @@ else
       lastPage="$n: $w"
     fi
     if [[ "$n" =~ "page-break" ]]; then
-      i+=1;
+      ((i+=1))
     fi
   done
   rm content.xml
